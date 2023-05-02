@@ -1,4 +1,4 @@
-# task-list 📕book:
+# task-list 📕
 
 Este es un ejemplo simple de una aplicacion CRUD
 
