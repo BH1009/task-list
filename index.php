@@ -24,6 +24,9 @@
                     <form action="index.php" method="post" novalidate>
                     <?php
                         include "conexion.php";
+                        $Titulo = '';
+                        $Descripcion = '';
+                        $FechaEntrega = '';
                         if(isset($_POST["titulo"])){
                             $Titulo = $_POST['titulo'];
                             $Descripcion = $_POST['descripcion'];
@@ -57,23 +60,20 @@
                                 echo "<div class='alert alert-success '>";
                                     echo "<li>" . "Se a agregado una nueva tarea" . "</li>";
                             }
-                            header("refresh:1");
                             echo "</div>";
-                            
-                            
                         }
                     ?>    
                     <label for="titulo" class="form-label ms-2">Titulo</label>
                         <br>
-                    <input type="text" name="titulo" id="titulo" class="form-text ms-2" placeholder="✏Escriba un titulo">
+                    <input type="text" name="titulo" id="titulo" class="form-text ms-2" placeholder="✏Escriba un titulo" value="<?php echo $Titulo; ?>">
                         <br><br>
                     <label for="descripcion" class="form-label ms-2">Descripcion</label>
                         <br>
-                    <textarea name="descripcion" id="descripcion" cols="25" rows="8" class="form-text ms-2" placeholder="📝Escriba una descripcion"></textarea>
+                    <textarea name="descripcion" id="descripcion" cols="25" rows="8" class="form-text ms-2" placeholder="📝Escriba una descripcion" value="<?php echo $Descripcion; ?>"></textarea>
                         <br><br>
                     <label for="fecha" class="form-label ms-2">Fecha</label>
                         <br>
-                    <input type="date" name="fecha" id="fecha" class="form ms-2">
+                    <input type="date" name="fecha" id="fecha" class="form ms-2" value="<?php echo $FechaEntrega; ?>">
                         <br><br>
                     <button class="btn btn-outline-success ms-2" type="submit" name="enviar">Agregar tarea</button>
                         <br><br>
@@ -87,13 +87,22 @@
                     include 'conexion.php';
                     $sql = "SELECT id, titulo, descripcion, fecha FROM tareas";
                     $datos = $con->query($sql);
-                    while($row =$datos->fetch_assoc()){ 
-                ?>
-                    <h1 class="display-6"><b><?php echo $row ['titulo']?></b></h1>
-                    <p><?php echo $row ['descripcion']?></p>
-                    <p><?php echo $row ['fecha']?></p>
-                    <a href="modificartarea.php?id=<?php echo $row['id'] ?>"><button class="btn btn-outline-warning">⚠</button></a>
-                    <a href="eliminartarea.php?id=<?php echo $row['id'] ?>"><button class="btn btn-outline-danger" >❌</button></a>
+                    while($row = $datos->fetch_assoc()){ 
+                ?>  
+                    <br>
+                    <!--card para representar la informacion-->                
+                    <div class="card ">
+                        <div class="card-body">
+                            <h5 class="card-title"><?php echo $row ['titulo']?></h5>
+                            <p class="card-text">
+                                <p><?php echo $row ['descripcion']?></p>
+                                <p><?php echo $row ['fecha']?></p>
+                            </p>
+                            <a href="modificartarea.php?id=<?php echo $row['id'] ?>"><button class="btn btn-outline-warning">⚠</button></a>
+                            <a href="eliminartarea.php?id=<?php echo $row['id'] ?>"><button class="btn btn-outline-danger" >❌</button></a>
+                        </div>
+                    </div>
+                    <br>
                 <?php    
                     }
                 ?>
