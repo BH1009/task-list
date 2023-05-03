@@ -1,6 +1,6 @@
 # task-list 📕
 
-Este es un ejemplo simple de una aplicacion CRUD
+Este es un ejemplo simple de una aplicacion CRUD echa en php
 
 1. (Create) Crea :heavy_plus_sign:
 
